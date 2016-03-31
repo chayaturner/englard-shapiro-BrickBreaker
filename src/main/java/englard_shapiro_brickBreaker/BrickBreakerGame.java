@@ -14,7 +14,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class BrickBrackerGame extends JFrame implements KeyListener {
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
+@Singleton
+public class BrickBreakerGame extends JFrame implements KeyListener {
 
 	/**
 	 * 
@@ -30,7 +34,8 @@ public class BrickBrackerGame extends JFrame implements KeyListener {
 	private boolean left = false;
 	private boolean right = false;
 
-	public BrickBrackerGame() {
+	@Inject
+	public BrickBreakerGame() {
 		setSize(600, 600);
 		setTitle("Brick Breaker");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

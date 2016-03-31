@@ -20,10 +20,10 @@ public class Board extends JPanel {
 	public static final int BOARD_HEIGHT = 600;
 	public static final int BOARD_WIDTH = 600;
 	private int livesLeft;
-	private BrickBrackerGame frame;
+	private BrickBreakerGame frame;
 	private int score;
 
-	public Board(BrickBrackerGame frame) {
+	public Board(BrickBreakerGame frame) {
 		this.setSize(BOARD_WIDTH, BOARD_HEIGHT);
 		this.setBackground(Color.black);
 		paddle = new Paddle();
