@@ -5,7 +5,7 @@ public class Paddle {
 	private static final int MOVE_AMOUNT = 2;
 	private int xPos;
 	private int yPos;
-	public static final int PADDLE_LENGTH = 80;
+	public static int PADDLE_LENGTH = 80;
 	public static final int PADDLE_HEIGHT = 15;
 
 	public Paddle() {
@@ -35,4 +35,7 @@ public class Paddle {
 		}
 	}
 
+	public void setPaddleLength(int amount) {
+		PADDLE_LENGTH += amount;
+	}
 }
