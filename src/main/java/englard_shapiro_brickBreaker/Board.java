@@ -147,7 +147,7 @@ public class Board extends JPanel {
 				// send in new ball , remove this ball
 				livesLeft--;
 				frame.setLivesText(livesLeft);
-				ball = new Ball(paddle.getX() + Paddle.PADDLE_LENGTH/2,
+				ball = new Ball(paddle.getX() + Paddle.PADDLE_LENGTH / 2,
 						(paddle.getY() - Paddle.PADDLE_HEIGHT) - 10);
 			}
 		} else {
