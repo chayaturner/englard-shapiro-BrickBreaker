@@ -35,7 +35,11 @@ public class Paddle {
 		}
 	}
 
-	public void setPaddleLength(int amount) {
-		PADDLE_LENGTH += amount;
+	public void paddleGrow() {
+		PADDLE_LENGTH = 100;
+	}
+
+	public void paddleShrink() {
+		PADDLE_LENGTH = 50;
 	}
 }

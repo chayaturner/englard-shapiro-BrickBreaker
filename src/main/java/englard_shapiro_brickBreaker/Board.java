@@ -29,8 +29,9 @@ public class Board extends JPanel {
 		this.setBackground(Color.black);
 		paddle = new Paddle();
 		ball = new Ball(BOARD_WIDTH / 2, (paddle.getY() - Paddle.PADDLE_HEIGHT) - 10);
-		powerUp = new PowerUp(BOARD_WIDTH / 2, (paddle.getY() - Paddle.PADDLE_HEIGHT) - 10);
+		powerUp = new PowerUp(560, 170);
 		bricks = new ArrayList<Piece>();
+
 		bricks.add(new Piece(0, 50, Color.RED));
 		bricks.add(new Piece(50, 50, Color.RED));
 		bricks.add(new Piece(100, 50, Color.RED));
@@ -90,7 +91,6 @@ public class Board extends JPanel {
 		bricks.add(new Piece(400, 170, Color.BLUE));
 		bricks.add(new Piece(450, 170, Color.BLUE));
 		bricks.add(new Piece(500, 170, Color.BLUE));
-
 		bricks.add(new Piece(550, 170, Color.CYAN)); // powerUpPiece
 
 		livesLeft = 3;
@@ -101,7 +101,7 @@ public class Board extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.darkGray);
+		g.setColor(Color.lightGray);
 		g.fillRect(paddle.getX(), paddle.getY(), Paddle.PADDLE_LENGTH, Paddle.PADDLE_HEIGHT);
 		g.setColor(Color.white);
 		g.fillOval(ball.getX(), ball.getY(), Ball.BALL_DIAMETER, Ball.BALL_DIAMETER);
@@ -163,9 +163,9 @@ public class Board extends JPanel {
 					score += 300;
 				} else if (brickColor == Color.ORANGE) {
 					score += 400;
-				} else if (brickColor == Color.CYAN) { // powerUpPeice
-					score += 500;
-					livesLeft++;
+				} else if (brickColor == Color.CYAN) { // powerUpPiece
+					score += 100;
+					// dropPowerUp();
 				} else {
 					score += 500;
 				}
@@ -173,6 +173,12 @@ public class Board extends JPanel {
 				bricks.remove(hitBrick);
 			}
 		}
+	}
+
+	public void dropPowerUp() {
+
+		livesLeft++;
+		frame.setLivesText(livesLeft);
 	}
 
 	public void checkWinner() {
