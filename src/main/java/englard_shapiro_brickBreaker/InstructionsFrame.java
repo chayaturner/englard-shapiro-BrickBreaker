@@ -16,7 +16,6 @@ public class InstructionsFrame extends JFrame {
 	public InstructionsFrame() {
 		setSize(200, 150);
 		setTitle("Instructions");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setResizable(false);

@@ -125,14 +125,14 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 
 		instructions.addActionListener(new AbstractAction() {
 
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				InstructionsFrame inst = new InstructionsFrame();
+				new InstructionsFrame();
 			}
 
-		}
-
-		);
+		});
 
 		scorePanel.add(instructions, BorderLayout.WEST);
 		scorePanel.add(lives, BorderLayout.CENTER);
