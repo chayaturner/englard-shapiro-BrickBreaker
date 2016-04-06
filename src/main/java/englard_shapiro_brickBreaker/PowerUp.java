@@ -58,4 +58,8 @@ public class PowerUp {
 		return hit;
 	}
 
+	public void drop() {
+		yPos += 1;
+	}
+
 }

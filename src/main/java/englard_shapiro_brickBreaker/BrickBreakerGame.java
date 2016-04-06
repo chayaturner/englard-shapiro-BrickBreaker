@@ -23,9 +23,6 @@ import com.google.inject.Singleton;
 @Singleton
 public class BrickBreakerGame extends JFrame implements KeyListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel scorePanel;
 	private JLabel lives, score;
@@ -130,8 +127,8 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				isPaused = true;
-				InstructionsFrame inst = new InstructionsFrame();
-				inst.addWindowListener(new java.awt.event.WindowAdapter() {
+				// unpause on instructions close
+				new InstructionsFrame().addWindowListener(new java.awt.event.WindowAdapter() {
 					@Override
 					public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 						{

@@ -10,9 +10,6 @@ import javax.swing.JPanel;
 
 public class Board extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Paddle paddle;
 	private Ball ball;
@@ -165,7 +162,6 @@ public class Board extends JPanel {
 					score += 400;
 				} else if (brickColor == Color.CYAN) { // powerUpPiece
 					score += 100;
-					// dropPowerUp();
 				} else {
 					score += 500;
 				}
@@ -175,11 +171,11 @@ public class Board extends JPanel {
 		}
 	}
 
-	public void dropPowerUp() {
+	// public void dropPowerUp() {
 
-		livesLeft++;
-		frame.setLivesText(livesLeft);
-	}
+	// livesLeft++;
+	// frame.setLivesText(livesLeft);
+	// }
 
 	public void checkWinner() {
 		if (bricks.size() == 0) {
