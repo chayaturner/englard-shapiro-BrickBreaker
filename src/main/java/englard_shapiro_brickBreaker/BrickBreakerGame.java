@@ -129,7 +129,17 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				new InstructionsFrame();
+				isPaused = true;
+				InstructionsFrame inst = new InstructionsFrame();
+				inst.addWindowListener(new java.awt.event.WindowAdapter() {
+					@Override
+					public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+						{
+							isPaused = false;
+						}
+					}
+				});
+
 			}
 
 		});

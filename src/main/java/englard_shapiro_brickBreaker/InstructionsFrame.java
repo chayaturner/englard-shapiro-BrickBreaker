@@ -25,7 +25,8 @@ public class InstructionsFrame extends JFrame {
 	private void setInstructions() {
 		instLbl = new JLabel(
 				"<html>Instructions:<br>" + "Hit all the bricks before your lives run out.<br>"
-						+ "If you hit a Power Up brick, <br>" + "catch the ball to gain an extra life!<br>" + "</html>",
+						+ "If you hit a Power Up brick, <br>" + "catch the ball to gain an extra life!<br>"
+						+ "Press P to Pause game.<br>" + "Press R to Resume game.<br>" + "</html>",
 				SwingConstants.CENTER);
 		instLbl.setForeground(Color.BLUE);
 		add(instLbl, BorderLayout.NORTH);
