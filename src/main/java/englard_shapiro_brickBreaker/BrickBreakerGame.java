@@ -4,12 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.AbstractAction;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,6 +36,7 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 	private Runnable play;
 	private boolean left = false;
 	private boolean right = false;
+	private JButton instructions;
 
 	@Inject
 	public BrickBreakerGame() {
@@ -52,16 +56,17 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 	private void RunGame() {
 		Runnable playSound = new Runnable() {
 
+			@Override
 			public void run() {
 				music = new MusicThread();
 				music.start();
 			}
 		};
-		this.musicExecutor.scheduleAtFixedRate(playSound, 0, 22,
-				TimeUnit.SECONDS);
+		this.musicExecutor.scheduleAtFixedRate(playSound, 0, 22, TimeUnit.SECONDS);
 
 		play = new Runnable() {
 
+			@Override
 			public void run() {
 				while (true) {
 					try {
@@ -114,7 +119,23 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 		lives.setForeground(Color.WHITE);
 		lives.setFont(new Font(lives.getFont().getName(), Font.PLAIN, 24));
 		setLivesText(3);
-		scorePanel.add(lives, BorderLayout.WEST);
+		instructions = new JButton("Instructions");
+		instructions.setBackground(Color.BLACK);
+		instructions.setForeground(Color.WHITE);
+
+		instructions.addActionListener(new AbstractAction() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				InstructionsFrame inst = new InstructionsFrame();
+			}
+
+		}
+
+		);
+
+		scorePanel.add(instructions, BorderLayout.WEST);
+		scorePanel.add(lives, BorderLayout.CENTER);
 		score = new JLabel("Score: 0 ");
 		score.setBackground(Color.BLACK);
 		score.setForeground(Color.WHITE);
@@ -130,6 +151,7 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 		music = new MusicThread();
 	}
 
+	@Override
 	public void keyPressed(KeyEvent e) {
 		int c = e.getKeyCode();
 		left = (c == KeyEvent.VK_LEFT);
@@ -142,6 +164,7 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 		}
 	}
 
+	@Override
 	public void keyReleased(KeyEvent e) {
 		int c = e.getKeyCode();
 		if (left && (c == KeyEvent.VK_LEFT)) {
@@ -152,6 +175,7 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 		}
 	}
 
+	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 	}
@@ -165,7 +189,7 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 
 	public void setLivesText(int numLives) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Lives: ");
+		builder.append("    Lives: ");
 		builder.append(numLives + " ");
 		for (int i = 1; i <= numLives; i++) {
 			builder.append("\u25CF ");
