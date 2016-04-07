@@ -117,6 +117,7 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 		lives.setFont(new Font(lives.getFont().getName(), Font.PLAIN, 24));
 		setLivesText(3);
 		instructions = new JButton("Instructions");
+		instructions.setFocusable(false);
 		instructions.setBackground(Color.BLACK);
 		instructions.setForeground(Color.WHITE);
 
@@ -133,6 +134,7 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 					public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 						{
 							isPaused = false;
+							
 						}
 					}
 				});

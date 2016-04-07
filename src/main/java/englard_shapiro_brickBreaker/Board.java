@@ -162,6 +162,30 @@ public class Board extends JPanel {
 					score += 400;
 				} else if (brickColor == Color.CYAN) { // powerUpPiece
 					score += 100;
+					
+					Runnable drop = new Runnable() {
+
+						@Override
+						public void run() {
+							while (true) {
+								try {
+										powerUp.drop();
+										repaint();
+										Thread.sleep(5);
+									
+								} catch (InterruptedException e) {
+									System.out.println("Interrupted thread exception");
+								}
+							}
+						}
+
+					};
+					new Thread(drop).start();
+					
+					
+					
+					
+					
 				} else {
 					score += 500;
 				}
