@@ -20,6 +20,7 @@ public class Board extends JPanel {
 	private int livesLeft;
 	private BrickBreakerGame frame;
 	private int score;
+	private boolean dropping;
 
 	public Board(BrickBreakerGame frame) {
 		this.setSize(BOARD_WIDTH, BOARD_HEIGHT);
@@ -28,6 +29,7 @@ public class Board extends JPanel {
 		ball = new Ball(BOARD_WIDTH / 2, (paddle.getY() - Paddle.PADDLE_HEIGHT) - 10);
 		powerUp = new PowerUp(560, 170);
 		bricks = new ArrayList<Piece>();
+		dropping = true;
 
 		bricks.add(new Piece(0, 50, Color.RED));
 		bricks.add(new Piece(50, 50, Color.RED));
@@ -163,16 +165,25 @@ public class Board extends JPanel {
 				} else if (brickColor == Color.CYAN) { // powerUpPiece
 					score += 100;
 					
+					//thread to drop power up
 					Runnable drop = new Runnable() {
 
 						@Override
 						public void run() {
-							while (true) {
+							while (dropping) {
 								try {
 										powerUp.drop();
 										repaint();
 										Thread.sleep(5);
 									
+										//if hit paddle, 
+										if(powerUp.checkHitPaddle()){
+											dropping = false;
+											livesLeft++;
+											frame.setLivesText(livesLeft);
+										}
+										
+										
 								} catch (InterruptedException e) {
 									System.out.println("Interrupted thread exception");
 								}
@@ -194,12 +205,6 @@ public class Board extends JPanel {
 			}
 		}
 	}
-
-	// public void dropPowerUp() {
-
-	// livesLeft++;
-	// frame.setLivesText(livesLeft);
-	// }
 
 	public void checkWinner() {
 		if (bricks.size() == 0) {

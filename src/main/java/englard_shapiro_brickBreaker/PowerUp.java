@@ -24,26 +24,35 @@ public class PowerUp {
 		return diameter;
 	}
 
-	private void checkHitPaddle(int x, int y) {
-		checkTopPaddle(x, y);
-		checkSidePaddle(x, y);
 
+	
+	
+	//NOT WORKING
+	public boolean checkHitPaddle() {
+		
+		if(checkTopPaddle(xPos,yPos) || checkSidePaddle(xPos,yPos)){
+			hit = true;
+		}
+		return hit;
 	}
 
-	private void checkTopPaddle(int x, int y) {
+	private boolean checkTopPaddle(int x, int y) {
 		if (yPos + diameter == (y)) {
 
 			if (xPos < (x + Paddle.PADDLE_LENGTH) && xPos > x) {
-				hit = true;
+				return true;
 			}
 		}
+		return false;
 	}
 
-	private void checkSidePaddle(int x, int y) {
+	private boolean checkSidePaddle(int x, int y) {
 
 		if (((leftSide(x) || rightSide(x)) && yPos + diameter >= y && yPos + diameter <= (y + Paddle.PADDLE_HEIGHT))) {
-			hit = true;
+			return true;
 		}
+		return false;
+	
 	}
 
 	private boolean rightSide(int x) {
