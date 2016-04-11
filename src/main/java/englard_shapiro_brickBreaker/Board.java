@@ -19,10 +19,10 @@ public class Board extends JPanel {
 	public static final int BOARD_WIDTH = 600;
 	private int livesLeft;
 	private BrickBreakerGame frame;
-	private int score;
+	private static int score = 0;
 	private boolean dropping;
 	private LevelFactory factory;
-	private static int levelNum = 0 ;
+	private static int levelNum = 1 ;
 	
 	public Board(BrickBreakerGame frame) {
 		this.setSize(BOARD_WIDTH, BOARD_HEIGHT);
@@ -34,13 +34,8 @@ public class Board extends JPanel {
 		levelNum++;
 		bricks = factory.getLevel(levelNum);
 		dropping = true;
-		
-		
-
-		/**/
 
 		livesLeft = 10;
-		score = 0;
 		this.frame = frame;
 	}
 
