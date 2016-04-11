@@ -42,4 +42,9 @@ public class Paddle {
 	public void paddleShrink() {
 		PADDLE_LENGTH = 50;
 	}
+	
+	public void restart(){
+		xPos = (Board.BOARD_WIDTH - PADDLE_LENGTH) / 2;
+		yPos = (Board.BOARD_HEIGHT - PADDLE_HEIGHT) - 75;
+	}
 }

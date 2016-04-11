@@ -209,4 +209,10 @@ public class Ball {
 	public int getY() {
 		return yPos;
 	}
+
+	public void restart() {
+		xPos = Board.BOARD_WIDTH / 2;
+		yPos = 500 - Paddle.PADDLE_HEIGHT;
+		
+	}
 }
