@@ -28,12 +28,11 @@ public class PlayGame extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		//BrickBrackerGame game = new BrickBrackerGame();
 		
 		//Guice
 		Injector injector = Guice.createInjector(new GameModule());
 		BrickBreakerGame game = injector.getInstance(BrickBreakerGame.class);
-		
+		game.setVisible(true);
 	}
 
 }

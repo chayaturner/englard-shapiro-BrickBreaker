@@ -41,7 +41,7 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 		setTitle("Brick Breaker");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null); // center the frame on computer screen
-		setVisible(true);
+//		setVisible(true);
 		setResizable(false);
 		createComponents();
 		setProperties();
@@ -51,7 +51,7 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 	}
 
 	private void RunGame() {
-		Runnable playSound = new Runnable() {
+		/*Runnable playSound = new Runnable() {
 
 			@Override
 			public void run() {
@@ -60,7 +60,7 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 			}
 		};
 		this.musicExecutor.scheduleAtFixedRate(playSound, 0, 22, TimeUnit.SECONDS);
-
+*/
 		play = new Runnable() {
 
 			@Override
@@ -156,8 +156,8 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 		board = new Board(this);
 		scorePanel = new JPanel(new BorderLayout());
 		isPaused = false;
-		this.musicExecutor = Executors.newScheduledThreadPool(1);
-		music = new MusicThread();
+		//this.musicExecutor = Executors.newScheduledThreadPool(1);
+		//music = new MusicThread();
 	}
 
 	@Override
