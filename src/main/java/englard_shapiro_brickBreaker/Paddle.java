@@ -42,4 +42,8 @@ public class Paddle {
 	public void paddleShrink() {
 		PADDLE_LENGTH = 50;
 	}
+	
+	public void resetPaddle(){
+		PADDLE_LENGTH = 80;
+	}
 }

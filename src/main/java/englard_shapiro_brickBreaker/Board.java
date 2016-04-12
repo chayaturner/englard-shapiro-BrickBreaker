@@ -14,6 +14,7 @@ public class Board extends JPanel {
 	private Paddle paddle;
 	private Ball ball;
 	private PowerUp powerUp;
+	private GrowPaddle growPaddle;
 	private ArrayList<Piece> bricks;
 	public static final int BOARD_HEIGHT = 600;
 	public static final int BOARD_WIDTH = 600;
@@ -28,6 +29,7 @@ public class Board extends JPanel {
 		paddle = new Paddle();
 		ball = new Ball(BOARD_WIDTH / 2, (paddle.getY() - Paddle.PADDLE_HEIGHT) - 10);
 		powerUp = new PowerUp(550, 170);
+		growPaddle = new GrowPaddle(500, 170);
 		bricks = new ArrayList<Piece>();
 		dropping = true;
 
@@ -40,7 +42,8 @@ public class Board extends JPanel {
 			bricks.add(new Piece(i, 170, Color.BLUE));
 		}
 		
-		bricks.add(new Piece(550, 170, Color.CYAN)); //powerUpPiece
+		bricks.add(new Piece(550, 170, Color.CYAN)); //testing powerUpPiece
+		bricks.add(new Piece(500, 170, Color.PINK)); // testing grow/shrink paddle
 
 		livesLeft = 3;
 		score = 0;
@@ -66,6 +69,9 @@ public class Board extends JPanel {
 		// power up life
 		g.setColor(Color.CYAN);
 		g.fillOval(powerUp.getX(), powerUp.getY(), powerUp.getDiameter(), powerUp.getDiameter());
+		//paddle grow
+		g.setColor(Color.PINK);
+		g.fillOval(growPaddle.getX(), growPaddle.getY(), growPaddle.getDiameter(), growPaddle.getDiameter());
 
 	}
 
@@ -126,7 +132,7 @@ public class Board extends JPanel {
 										repaint();
 										Thread.sleep(2);
 									
-										//if hit paddle, 
+										//check if caught
 										if(powerUp.checkHitPaddle(paddle.getX(), paddle.getY())){
 											dropping = false;
 											livesLeft++;
@@ -144,7 +150,36 @@ public class Board extends JPanel {
 					};
 					new Thread(drop).start();
 					
-			
+				} else if (brickColor == Color.PINK){ //growPaddle
+					score+=100; 
+					
+					Runnable drop = new Runnable() {
+
+						@Override
+						public void run() {
+							while (dropping) {
+								try {
+										growPaddle.drop();
+										repaint();
+										Thread.sleep(2);
+									
+										//check if caught 
+										if(growPaddle.checkHitPaddle(paddle.getX(), paddle.getY())){
+											dropping = false;
+											paddle.paddleGrow();
+											growPaddle.dispose();
+										}
+										
+										
+								} catch (InterruptedException e) {
+									System.out.println("Interrupted thread exception");
+								}
+							}
+						}
+
+					};
+					new Thread(drop).start();
+					
 				} else {
 					score += 500;
 				}
