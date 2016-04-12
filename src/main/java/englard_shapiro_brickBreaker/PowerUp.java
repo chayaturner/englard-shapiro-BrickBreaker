@@ -24,13 +24,10 @@ public class PowerUp {
 		return diameter;
 	}
 
-
-	
-	
-	//NOT WORKING
-	public boolean checkHitPaddle() {
+	//FIXED
+	public boolean checkHitPaddle(int x, int y) {
 		
-		if(checkTopPaddle(xPos,yPos) || checkSidePaddle(xPos,yPos)){
+		if(checkTopPaddle(x,y) || checkSidePaddle(x,y)){
 			hit = true;
 		}
 		return hit;
@@ -69,6 +66,11 @@ public class PowerUp {
 
 	public void drop() {
 		yPos += 1;
+	}
+	
+	public void dispose(){
+		yPos = 0;
+		xPos = 0;
 	}
 
 }
