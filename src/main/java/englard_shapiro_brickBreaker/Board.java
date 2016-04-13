@@ -29,7 +29,7 @@ public class Board extends JPanel {
 		paddle = new Paddle();
 		ball = new Ball(BOARD_WIDTH / 2, (paddle.getY() - Paddle.PADDLE_HEIGHT) - 10);
 		powerUp = new PowerUp(550, 170);
-		growPaddle = new GrowPaddle(500, 170);
+		growPaddle = new GrowPaddle(500, 170, paddle);
 		bricks = new ArrayList<Piece>();
 		dropping = true;
 
@@ -166,7 +166,7 @@ public class Board extends JPanel {
 										//check if caught 
 										if(growPaddle.checkHitPaddle(paddle.getX(), paddle.getY())){
 											dropping = false;
-											paddle.paddleGrow();
+											growPaddle.grow();
 											growPaddle.dispose();
 										}
 										
