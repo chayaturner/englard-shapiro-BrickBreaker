@@ -9,12 +9,6 @@ public class ResizePaddlePiece extends SpecialPiece {
 		this.paddle = paddle;
 	}
 
-	@Override
-	public void dispose() {
-		xPos = 20;
-		yPos = 0;
-	}
-
 	public void grow() {
 		paddle.paddleGrow();
 	}

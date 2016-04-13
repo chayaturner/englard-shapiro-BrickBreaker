@@ -31,9 +31,9 @@ public class Board extends JPanel {
 		this.setBackground(Color.black);
 		paddle = new Paddle();
 		ball = new Ball(BOARD_WIDTH / 2, (paddle.getY() - Paddle.PADDLE_HEIGHT) - 10);
-		powerUp = new PowerUpPiece(550, 170);
-		growPaddle = new ResizePaddlePiece(500, 170, paddle);
-		shrinkPaddle = new ResizePaddlePiece(450, 170, paddle);
+		powerUp = new PowerUpPiece(200, 80); // orange
+		growPaddle = new ResizePaddlePiece(500, 170, paddle); // blue
+		shrinkPaddle = new ResizePaddlePiece(400, 140, paddle); // green
 		bricks = new ArrayList<Piece>();
 		dropping = true;
 
@@ -119,29 +119,29 @@ public class Board extends JPanel {
 				if (brickColor == Color.BLUE) {
 					score += 100;
 
-					// HIT POWER UP PIECE
-					if (hitX == 550 && hitY == 170) {
-						score += 100;
-						hitPowerUp();
-					}
-
 					// HIT GROW PADDLE
 					if (hitX == 500 && hitY == 170) {
-						score += 100;
 						hitGrow();
-					}
-
-					// HIT SHRINK PADDLE
-					if (hitX == 450 && hitY == 170) {
-						hitShrink();
 					}
 
 				} else if (brickColor == Color.GREEN) {
 					score += 200;
+
+					// HIT SHRINK PADDLE
+					if (hitX == 400 && hitY == 140) {
+						hitShrink();
+					}
+
 				} else if (brickColor == Color.YELLOW) {
 					score += 300;
 				} else if (brickColor == Color.ORANGE) {
 					score += 400;
+
+					// HIT POWER UP PIECE
+					if (hitX == 200 && hitY == 80) {
+						hitPowerUp();
+					}
+
 				} else {
 					score += 500;
 				}
@@ -171,7 +171,6 @@ public class Board extends JPanel {
 	}
 
 	private void hitShrink() {
-		score += 100;
 
 		Runnable drop = new Runnable() {
 
@@ -185,6 +184,7 @@ public class Board extends JPanel {
 
 						// check if caught
 						if (shrinkPaddle.checkHitPaddle(paddle.getX(), paddle.getY())) {
+							score += 100;
 							dropping = false;
 							shrinkPaddle.shrink();
 							shrinkPaddle.dispose();
@@ -198,7 +198,7 @@ public class Board extends JPanel {
 
 		};
 		new Thread(drop).start();
-		dropping = true;
+		dropping = true; // reset
 
 		// Reset paddle size after 20 seconds
 		Timer t = new Timer();
@@ -226,6 +226,7 @@ public class Board extends JPanel {
 
 						// check if caught
 						if (growPaddle.checkHitPaddle(paddle.getX(), paddle.getY())) {
+							score += 100;
 							dropping = false;
 							growPaddle.grow();
 							growPaddle.dispose();
@@ -239,7 +240,7 @@ public class Board extends JPanel {
 
 		};
 		new Thread(drop).start();
-		dropping = true;
+		dropping = true; // reset
 
 		// Reset paddle size after 20 seconds
 		Timer t = new Timer();
@@ -270,6 +271,7 @@ public class Board extends JPanel {
 						// check if caught
 						if (powerUp.checkHitPaddle(paddle.getX(), paddle.getY())) {
 							dropping = false;
+							score += 100;
 							livesLeft++;
 							frame.setLivesText(livesLeft);
 							powerUp.dispose();
@@ -283,6 +285,6 @@ public class Board extends JPanel {
 
 		};
 		new Thread(drop).start();
-		dropping = true;
+		dropping = true; // reset
 	}
 }

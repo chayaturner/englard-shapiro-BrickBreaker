@@ -25,8 +25,8 @@ public class SpecialPiece {
 	}
 
 	public boolean checkHitPaddle(int x, int y) {
-		
-		if(checkTopPaddle(x,y) || checkSidePaddle(x,y)){
+
+		if (checkTopPaddle(x, y) || checkSidePaddle(x, y)) {
 			hit = true;
 		}
 		return hit;
@@ -48,7 +48,7 @@ public class SpecialPiece {
 			return true;
 		}
 		return false;
-	
+
 	}
 
 	private boolean rightSide(int x) {
@@ -67,8 +67,8 @@ public class SpecialPiece {
 		yPos += 1;
 	}
 
-	public void dispose(){
-		yPos = 0;
-		xPos = 0;
+	public void dispose() {
+		yPos = 610;
+		xPos = 610;
 	}
 }
