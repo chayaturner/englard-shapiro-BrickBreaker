@@ -36,14 +36,14 @@ public class Paddle {
 	}
 
 	public void paddleGrow() {
-		PADDLE_LENGTH = 100;
+		PADDLE_LENGTH = 120;
 	}
 
 	public void paddleShrink() {
 		PADDLE_LENGTH = 50;
 	}
-	
-	public void resetPaddle(){
+
+	public void resetPaddle() {
 		PADDLE_LENGTH = 80;
 	}
 }

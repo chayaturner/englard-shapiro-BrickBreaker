@@ -14,7 +14,7 @@ public class InstructionsFrame extends JFrame {
 	private JLabel instLbl;
 
 	public InstructionsFrame() {
-		setSize(200, 150);
+		setSize(200, 300);
 		setTitle("Instructions");
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -24,11 +24,11 @@ public class InstructionsFrame extends JFrame {
 	}
 
 	private void setInstructions() {
-		instLbl = new JLabel(
-				"<html>Instructions:<br>" + "Hit all the bricks before your lives run out.<br>"
-						+ "If you hit a Power Up brick, <br>" + "catch the ball to gain an extra life!<br>"
-						+ "Press P to Pause game.<br>" + "Press R to Resume game.<br>" + "</html>",
-				SwingConstants.CENTER);
+		instLbl = new JLabel("<html>Instructions:<br>" + "Hit all the bricks before your lives run out.<br>"
+				+ "If you hit a special brick, <br>" + "catch the dropping ball to get:<br>"
+				+ "- An extra life + 100 points<br>" + "- Grow your paddle for 20 seconds + 100 points<br>"
+				+ "Be careful, there are also paddle shrinkers!<br>" + "Press P to Pause game.<br>"
+				+ "Press R to Resume game.<br>" + "</html>", SwingConstants.CENTER);
 		instLbl.setForeground(Color.WHITE);
 		add(instLbl, BorderLayout.NORTH);
 
