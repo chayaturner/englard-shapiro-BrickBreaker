@@ -14,7 +14,7 @@ public class LevelFactory {
 		}
 		 
 		//Level 1		
-		/*for(int i = 0; i < 12; i++){
+		for(int i = 0; i < 12; i++){
 			levels.get(1).add(new Piece(i * 50, 50, Color.RED));
 		}
 		for(int i = 0; i < 11; i++){
@@ -28,7 +28,7 @@ public class LevelFactory {
 		}
 		for(int i = 0; i < 12; i++){
 			levels.get(1).add(new Piece(i * 50, 170, Color.BLUE));
-		}*/
+		}
 		
 				
 		

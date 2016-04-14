@@ -118,7 +118,7 @@ public class Board extends JPanel {
 					score += 100;
 
 					// HIT GROW PADDLE
-					if (hitX == 500 && hitY == 170) {
+					if (hitX == 500 && hitY == 170) { //blue
 						hitGrow();
 					}
 
@@ -126,7 +126,7 @@ public class Board extends JPanel {
 					score += 200;
 
 					// HIT SHRINK PADDLE
-					if (hitX == 400 && hitY == 140) {
+					if (hitX == 375 && hitY == 140) { //green
 						hitShrink();
 					}
 
@@ -136,7 +136,7 @@ public class Board extends JPanel {
 					score += 400;
 
 					// HIT POWER UP PIECE
-					if (hitX == 200 && hitY == 80) {
+					if (hitX == 225 && hitY == 80) { //orange
 						hitPowerUp();
 					}
 
