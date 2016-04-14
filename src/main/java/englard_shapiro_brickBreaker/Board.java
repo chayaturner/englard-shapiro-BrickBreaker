@@ -23,9 +23,11 @@ public class Board extends JPanel {
 	public static final int BOARD_WIDTH = 600;
 	private int livesLeft;
 	private BrickBreakerGame frame;
-	private int score;
+	private static int score = 0;
 	private boolean dropping;
-
+	private LevelFactory factory;
+	private static int levelNum = 0 ;
+	
 	public Board(BrickBreakerGame frame) {
 		this.setSize(BOARD_WIDTH, BOARD_HEIGHT);
 		this.setBackground(Color.black);
@@ -36,16 +38,9 @@ public class Board extends JPanel {
 		shrinkPaddle = new ResizePaddlePiece(400, 140, paddle); // green
 		bricks = new ArrayList<Piece>();
 		dropping = true;
-
-		// set up bricks
-		for (int i = 0; i <= 550; i += 50) {
-			bricks.add(new Piece(i, 50, Color.RED));
-			bricks.add(new Piece(i, 80, Color.ORANGE));
-			bricks.add(new Piece(i, 110, Color.YELLOW));
-			bricks.add(new Piece(i, 140, Color.GREEN));
-			bricks.add(new Piece(i, 170, Color.BLUE));
-		}
-
+		levelNum++;
+		factory = new LevelFactory();
+		bricks = factory.getLevel(levelNum);
 		livesLeft = 3;
 		score = 0;
 		this.frame = frame;
@@ -67,16 +62,18 @@ public class Board extends JPanel {
 			g.drawRect(brick.getX(), brick.getY(), Piece.BRICK_LENGTH, Piece.BRICK_WIDTH);
 		}
 
+		if(levelNum == 1){
+			// power up life
+			g.setColor(Color.ORANGE);
+			g.fillOval(powerUp.getX(), powerUp.getY(), powerUp.getDiameter(), powerUp.getDiameter());
+			// paddle grow
+			g.setColor(Color.BLUE);
+			g.fillOval(growPaddle.getX(), growPaddle.getY(), growPaddle.getDiameter(), growPaddle.getDiameter());
+			// paddle shrink
+			g.setColor(Color.GREEN);
+			g.fillOval(shrinkPaddle.getX(), shrinkPaddle.getY(), shrinkPaddle.getDiameter(), shrinkPaddle.getDiameter());
+		}
 		
-		// power up life
-		g.setColor(Color.ORANGE);
-		g.fillOval(powerUp.getX(), powerUp.getY(), powerUp.getDiameter(), powerUp.getDiameter());
-		// paddle grow
-		g.setColor(Color.BLUE);
-		g.fillOval(growPaddle.getX(), growPaddle.getY(), growPaddle.getDiameter(), growPaddle.getDiameter());
-		// paddle shrink
-		g.setColor(Color.GREEN);
-		g.fillOval(shrinkPaddle.getX(), shrinkPaddle.getY(), shrinkPaddle.getDiameter(), shrinkPaddle.getDiameter());
 
 	}
 
@@ -155,14 +152,40 @@ public class Board extends JPanel {
 
 	public void checkWinner() {
 		if (bricks.size() == 0) {
-			int playAgain = JOptionPane.showConfirmDialog(null, "You win! Would you like to play again?",
-					"Congratulations!!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
-					new ImageIcon(getClass().getResource("/winner.jpg")));
-			if (playAgain == 0) {
-				frame.restart();
-			} else {
-				frame.dispose();
-				System.exit(0);
+			if(levelNum < 3){
+				int nextLevel = JOptionPane.showConfirmDialog(null, "Great job! \nWould you like to go to the next level?",
+						"Level Cleared", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				if (nextLevel == 0) {
+					/*powerUp.dispose();
+					growPaddle.dispose();
+					shrinkPaddle.dispose();*/
+					paddle.restart();
+					ball.restart(); 
+					bricks.clear();
+					dropping = true;
+					frame.restart();
+				} else {
+					frame.dispose();
+					System.exit(0);
+				}
+			}
+			else{	//cleared 3rd level
+					int playAgain = JOptionPane.showConfirmDialog(null, "Great job! \nWould you like to play again?",
+						"Congratulations!!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+						new ImageIcon(getClass().getResource("/winner.jpg")));
+				if (playAgain == 0) {
+					levelNum = 0;
+					paddle.restart();
+					ball.restart(); 
+					powerUp = new PowerUpPiece(560, 170);
+					bricks.clear();
+					dropping = true;
+					frame.restart();
+				} else {
+					frame.dispose();
+					System.exit(0);
+				}
+				
 			}
 		}
 	}

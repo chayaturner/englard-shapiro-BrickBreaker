@@ -45,5 +45,10 @@ public class Paddle {
 
 	public void resetPaddle() {
 		PADDLE_LENGTH = 80;
+		}
+	
+	public void restart(){
+		xPos = (Board.BOARD_WIDTH - PADDLE_LENGTH) / 2;
+		yPos = (Board.BOARD_HEIGHT - PADDLE_HEIGHT) - 75;
 	}
 }

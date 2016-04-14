@@ -41,7 +41,6 @@ public class BrickBreakerGame extends JFrame implements KeyListener {
 		setTitle("Brick Breaker");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null); // center frame
-		// setVisible(true);
 		setResizable(false);
 		createComponents();
 		setProperties();
