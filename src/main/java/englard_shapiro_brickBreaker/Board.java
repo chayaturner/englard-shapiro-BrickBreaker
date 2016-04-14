@@ -67,14 +67,15 @@ public class Board extends JPanel {
 			g.drawRect(brick.getX(), brick.getY(), Piece.BRICK_LENGTH, Piece.BRICK_WIDTH);
 		}
 
+		
 		// power up life
-		g.setColor(Color.CYAN);
+		g.setColor(Color.ORANGE);
 		g.fillOval(powerUp.getX(), powerUp.getY(), powerUp.getDiameter(), powerUp.getDiameter());
 		// paddle grow
-		g.setColor(Color.PINK);
+		g.setColor(Color.BLUE);
 		g.fillOval(growPaddle.getX(), growPaddle.getY(), growPaddle.getDiameter(), growPaddle.getDiameter());
 		// paddle shrink
-		g.setColor(Color.MAGENTA);
+		g.setColor(Color.GREEN);
 		g.fillOval(shrinkPaddle.getX(), shrinkPaddle.getY(), shrinkPaddle.getDiameter(), shrinkPaddle.getDiameter());
 
 	}
