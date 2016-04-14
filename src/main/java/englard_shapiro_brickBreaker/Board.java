@@ -22,7 +22,7 @@ public class Board extends JPanel {
 	private static int score = 0;
 	private boolean dropping;
 	private LevelFactory factory;
-	private static int levelNum = 1 ;
+	private static int levelNum = 0 ;
 	
 	public Board(BrickBreakerGame frame) {
 		this.setSize(BOARD_WIDTH, BOARD_HEIGHT);
@@ -150,19 +150,38 @@ public class Board extends JPanel {
 
 	public void checkWinner() {
 		if (bricks.size() == 0) {
-			int playAgain = JOptionPane.showConfirmDialog(null, "You win! Would you like to play again?",
-					"Congratulations!!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
-					new ImageIcon(getClass().getResource("/winner.jpg")));
-			if (playAgain == 0) {
-				paddle.restart();
-				ball.restart(); 
-				powerUp = new PowerUp(560, 170);
-				bricks.clear();
-				dropping = true;
-				frame.restart();
-			} else {
-				frame.dispose();
-				System.exit(0);
+			if(levelNum < 3){
+				int nextLevel = JOptionPane.showConfirmDialog(null, "Great job! \nWould you like to go to the next level?",
+						"Level Cleared", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				if (nextLevel == 0) {
+					paddle.restart();
+					ball.restart(); 
+					powerUp = new PowerUp(560, 170);
+					bricks.clear();
+					dropping = true;
+					frame.restart();
+				} else {
+					frame.dispose();
+					System.exit(0);
+				}
+			}
+			else{	//cleared 3rd level
+					int playAgain = JOptionPane.showConfirmDialog(null, "Great job! \nWould you like to play again?",
+						"Congratulations!!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+						new ImageIcon(getClass().getResource("/winner.jpg")));
+				if (playAgain == 0) {
+					levelNum = 0;
+					paddle.restart();
+					ball.restart(); 
+					powerUp = new PowerUp(560, 170);
+					bricks.clear();
+					dropping = true;
+					frame.restart();
+				} else {
+					frame.dispose();
+					System.exit(0);
+				}
+				
 			}
 		}
 	}

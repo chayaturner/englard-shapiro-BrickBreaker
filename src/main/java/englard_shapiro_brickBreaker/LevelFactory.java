@@ -9,11 +9,11 @@ public class LevelFactory {
 		
 	public LevelFactory() {
 		levels = new ArrayList<ArrayList<Piece>>();
-		
-		// Level 1
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 4; i++){
 			levels.add(new ArrayList<Piece>());
 		}
+		 
+		//Level 1		
 		for(int i = 0; i < 12; i++){
 			levels.get(1).add(new Piece(i * 50, 50, Color.RED));
 		}
@@ -85,12 +85,29 @@ public class LevelFactory {
 
 		
 		// Level 3
-		
-		
-		// Level 4
-		
-		
-		// Level 5
+		for(int i = 0; i < 12; i++){
+			levels.get(3).add(new Piece(i * 50, 50, Color.ORANGE));
+		}
+		levels.get(3).add(new Piece(0, 80, Color.ORANGE));
+		for(int i = 1; i < 11; i++){
+			levels.get(3).add(new Piece(i * 50, 80, Color.CYAN));
+		}
+		levels.get(3).add(new Piece(550, 80, Color.ORANGE));		
+		levels.get(3).add(new Piece(0, 110, Color.ORANGE));
+		levels.get(3).add(new Piece(50, 110, Color.CYAN));
+		for(int i = 2; i < 10; i++){
+			levels.get(3).add(new Piece(i * 50, 110, Color.GREEN));
+		}
+		levels.get(3).add(new Piece(500, 110, Color.CYAN));
+		levels.get(3).add(new Piece(550, 110, Color.ORANGE));
+		levels.get(3).add(new Piece(0, 140, Color.ORANGE));
+		for(int i = 1; i < 11; i++){
+			levels.get(3).add(new Piece(i * 50, 140, Color.CYAN));
+		}		
+		levels.get(3).add(new Piece(550, 140, Color.ORANGE));
+		for(int i = 0; i < 12; i++){
+			levels.get(3).add(new Piece(i * 50, 170, Color.ORANGE));
+		}
 		
 	}
 
