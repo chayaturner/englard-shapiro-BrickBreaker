@@ -26,8 +26,8 @@ public class Board extends JPanel {
 	private static int score = 0;
 	private boolean dropping;
 	private LevelFactory factory;
-	private static int levelNum = 0 ;
-	
+	private static int levelNum = 0;
+
 	public Board(BrickBreakerGame frame) {
 		this.setSize(BOARD_WIDTH, BOARD_HEIGHT);
 		this.setBackground(Color.black);
@@ -62,7 +62,7 @@ public class Board extends JPanel {
 			g.drawRect(brick.getX(), brick.getY(), Piece.BRICK_LENGTH, Piece.BRICK_WIDTH);
 		}
 
-		if(levelNum == 1){
+		if (levelNum == 1) {
 			// power up life
 			g.setColor(Color.ORANGE);
 			g.fillOval(powerUp.getX(), powerUp.getY(), powerUp.getDiameter(), powerUp.getDiameter());
@@ -71,9 +71,9 @@ public class Board extends JPanel {
 			g.fillOval(growPaddle.getX(), growPaddle.getY(), growPaddle.getDiameter(), growPaddle.getDiameter());
 			// paddle shrink
 			g.setColor(Color.GREEN);
-			g.fillOval(shrinkPaddle.getX(), shrinkPaddle.getY(), shrinkPaddle.getDiameter(), shrinkPaddle.getDiameter());
+			g.fillOval(shrinkPaddle.getX(), shrinkPaddle.getY(), shrinkPaddle.getDiameter(),
+					shrinkPaddle.getDiameter());
 		}
-		
 
 	}
 
@@ -118,7 +118,7 @@ public class Board extends JPanel {
 					score += 100;
 
 					// HIT GROW PADDLE
-					if (hitX == 500 && hitY == 170) { //blue
+					if (hitX == 500 && hitY == 170) { // blue
 						hitGrow();
 					}
 
@@ -126,7 +126,7 @@ public class Board extends JPanel {
 					score += 200;
 
 					// HIT SHRINK PADDLE
-					if (hitX == 375 && hitY == 140) { //green
+					if (hitX == 375 && hitY == 140) { // green
 						hitShrink();
 					}
 
@@ -136,7 +136,7 @@ public class Board extends JPanel {
 					score += 400;
 
 					// HIT POWER UP PIECE
-					if (hitX == 225 && hitY == 80) { //orange
+					if (hitX == 175 && hitY == 80) { // orange
 						hitPowerUp();
 					}
 
@@ -152,15 +152,17 @@ public class Board extends JPanel {
 
 	public void checkWinner() {
 		if (bricks.size() == 0) {
-			if(levelNum < 3){
-				int nextLevel = JOptionPane.showConfirmDialog(null, "Great job! \nWould you like to go to the next level?",
-						"Level Cleared", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			if (levelNum < 3) {
+				int nextLevel = JOptionPane.showConfirmDialog(null,
+						"Great job! \nWould you like to go to the next level?", "Level Cleared",
+						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 				if (nextLevel == 0) {
-					/*powerUp.dispose();
-					growPaddle.dispose();
-					shrinkPaddle.dispose();*/
+					/*
+					 * powerUp.dispose(); growPaddle.dispose();
+					 * shrinkPaddle.dispose();
+					 */
 					paddle.restart();
-					ball.restart(); 
+					ball.restart();
 					bricks.clear();
 					dropping = true;
 					frame.restart();
@@ -168,15 +170,14 @@ public class Board extends JPanel {
 					frame.dispose();
 					System.exit(0);
 				}
-			}
-			else{	//cleared 3rd level
-					int playAgain = JOptionPane.showConfirmDialog(null, "Great job! \nWould you like to play again?",
+			} else { // cleared 3rd level
+				int playAgain = JOptionPane.showConfirmDialog(null, "Great job! \nWould you like to play again?",
 						"Congratulations!!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
 						new ImageIcon(getClass().getResource("/winner.jpg")));
 				if (playAgain == 0) {
 					levelNum = 0;
 					paddle.restart();
-					ball.restart(); 
+					ball.restart();
 					powerUp = new PowerUpPiece(560, 170);
 					bricks.clear();
 					dropping = true;
@@ -185,7 +186,7 @@ public class Board extends JPanel {
 					frame.dispose();
 					System.exit(0);
 				}
-				
+
 			}
 		}
 	}
